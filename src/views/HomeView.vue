@@ -576,7 +576,7 @@ export default {
   position: fixed;
   width: 28.7vw;
   margin-top: 29px;
-  background-color: #ebebeb;
+  background-color: #fff;
   border-bottom: 1px solid black;
 }
 .add-сamera-manual input{

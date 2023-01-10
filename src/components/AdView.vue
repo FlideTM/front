@@ -35,7 +35,7 @@ export default{
   border-bottom: none;
   border-radius: 5px;
   padding: 0 !important;
-  background-color: #c23979;
+  background-color: transparent;
   color: white;
   height: 250px;
 }

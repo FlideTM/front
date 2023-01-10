@@ -147,11 +147,14 @@
     </div>
     <div id="arrows">
       <Icon @click="arrow = !arrow" v-if="arrow" icon="mdi:arrow-expand-up" />
-      <Icon @click="arrow = !arrow" v-if="!arrow" icon="mdi:arrow-expand-down" style="width: 100%; background-color: #ebebeb; bottom: 0" />
+      <Icon @click="arrow = !arrow" v-if="!arrow" icon="mdi:arrow-expand-down" style="width: 100%; background-color: #fff; bottom: 0" />
     </div>
     <div id="bottom-cams-nav" v-if="!arrow">
-      
+      <div id="header">
+        <div id="search"><input type="text" placeholder="Search... (address, description)" v-model="vvod" /></div>
+      </div>
       <div id="all-cams" v-if="!cam_popup">
+        <AdView class="cams" />
         <div class="cams" v-for="(cam) in (camera, filteredList())" :key="cam">
           <!-- Show cameras -->
           <div class="params">
@@ -383,6 +386,34 @@
   </script>
   <style scoped>
   /* WEB */
+
+#header{
+  font-size: 14pt;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: fixed;
+  background-color: white;
+  width: calc(22vw - 23px);
+  min-width: 300px;
+  max-width: 100%;
+  padding: 10px 0;
+}
+#header #search, #header input{
+  width: 100%;
+  box-sizing: border-box;
+}
+#header input{
+  border-radius: 3px;
+  border: none;
+  padding: 10px 15px;
+}
+#header input:focus-visible{
+  outline: none;
+}
+
 @media screen and (min-width: 900px){
   #mobile-all{display: none;}
   .img-icon {
@@ -392,7 +423,7 @@
   #all{
     display: flex;
     flex-direction: row;
-    width: 97vw;
+    width: 100%;
     height: 99vh;
     margin-left: auto;
     margin-right: auto;
@@ -474,9 +505,9 @@
   }
   #cameras{
     width: 22vw;
-    padding: 10px;
-    overflow: scroll;
+    overflow-y: scroll;
     min-width: 300px;
+    box-sizing: border-box;
   }
 
   .ad{
@@ -486,39 +517,12 @@
     margin-right: 50px;
     width: 20vw;
   }
-
-  #header{
-    font-size: 14pt;
-    font-weight: bold;
-    justify-content: center;
-    border-bottom: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    position: fixed;
-    background-color: white;
-    width: 20.8vw;
-    margin-top: -10px;
-    min-width: 300px;
-  }
-  #header #search{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    border: 3px solid #14A1D9;
-    border-radius: 5px;
-  }
-  #header input{
-    border-radius: 3px;
-    border: none;
-    padding: 5px;
-  }
   #all-cams{
-    margin-top: 45px;
+    margin-top: 70px;
+    padding: 0 15px;
   }
   .cams{
     padding: 10px;
-    margin: 6px;
     border-radius: 10px;
     outline: 3px solid #14A1D9;
     outline-offset: -2px;
@@ -527,7 +531,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    min-width: 300px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    aspect-ratio: 16 / 9;
+    height: auto;
   }
 
   .params{
@@ -636,6 +644,11 @@
 
 /* MOBILE */
 @media screen and (max-width: 900px){
+  #header{
+    width: 100%;
+    top: 0;
+  }
+
   #all{display: none;}
   .content{display: none;}
 
@@ -660,21 +673,27 @@
     z-index: 99999;
     bottom: 0;
     color: black;
+    height: 50px;
+  }
+  #arrows svg{
+    height: 100%;
   }
   #bottom-cams-nav{
-    background-color: #ebebeb;
+    background-color: #fff;
     position: fixed;
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
     overflow: scroll;
+    padding-top: 70px;
     z-index: 99998;
   }
   #all-cams{
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 10px;
+    padding-bottom: 50px;
   }
   .cams{
     border: 3px solid #14A1D9;
@@ -690,4 +709,16 @@
     width: 99%;
   }
 }
-  </style>
+
+#mobile-all #all-cams{
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+#mobile-all .camera.cams{
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+</style>
